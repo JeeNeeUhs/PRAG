@@ -6,23 +6,19 @@ You know how GNU stands for "GNU's Not Unix" and WINE stands for "WINE Is Not an
 
 ## Installation
 
-### Build from source
+```sh
+brew install JeeNeeUhs/tap/prag
+```
+
+## Build from source
 
 ```sh
 git clone https://github.com/JeeNeeUhs/PRAG.git
 cd PRAG
 make
+# This copies `PRAG` to `/usr/local/bin/`, making it available everywhere.
+# sudo make install
 ```
-
-This produces a `PRAG` binary in the project root.
-
-### Install system-wide
-
-```sh
-sudo make install
-```
-
-This copies `PRAG` to `/usr/local/bin/`, making it available everywhere.
 
 ### Clean up
 
