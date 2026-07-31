@@ -40,6 +40,7 @@ void print_help(char *prog) {
 	printf("Generate GNU WINE style recursive acronyms for open-source projects.\n");
 	printf("\n");
 	printf("Options:\n");
+	printf("  -v\t Show version number\n");
 	printf("  -h\t Show this help message\n");
 	printf("  -i\t Use \"is not\" instead of \"'s not\"(You can't use with -spr)\n");
 	printf("  -l\t Use a full string prefix (all chars included in acronym)\n");

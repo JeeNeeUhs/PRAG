@@ -43,6 +43,7 @@ PRAG [OPTIONS] <char> <project-to-replace>
 | Flag | Description |
 |------|-------------|
 | `-h` | Show the help message |
+| `-v` | Show version number |
 | `-i` | Use `"is not"` instead of `"'s not"` (cannot be combined with `-s`, `-p`, `-r`, `-n`) |
 | `-l` | Use a full string prefix (all chars are included in the acronym) |
 | `-s` | Shorten mode: build the acronym from the uppercase first letters of each argument (cannot be combined with `-i`, `-p`, `-r`, `-n`) |

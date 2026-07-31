@@ -26,10 +26,13 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	while ((opt = getopt(argc, argv, "hilsprn")) != -1) {
+	while ((opt = getopt(argc, argv, "hvilsprn")) != -1) {
 		switch (opt) {
 			case 'h':
 				print_help(argv[0]);
+				return 0;
+			case 'v':
+				printf("PRAGv1.0.0\n");
 				return 0;
 			case 'i':
 				i = 1;
