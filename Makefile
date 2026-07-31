@@ -1,23 +1,27 @@
-NAME        = PRAG
-CFLAGS      = -Wall -Wextra -Werror
+NAME        = prag
+CC         ?= cc
+CFLAGS     ?= -Wall -Wextra -O2
+PREFIX     ?= /usr/local
+BINDIR      = $(PREFIX)/bin
 SRCS        = main.c utils.c
-OBJS        = $(addprefix $(BUILD), $(SRCS:.c=.o))
+BUILD       = build
+OBJS        = $(addprefix $(BUILD)/, $(SRCS:.c=.o))
 RM          = rm -rf
-BUILD       = build/
 
-all: $(BUILD) $(NAME)
+all: $(NAME)
 
-install: all
-	cp $(NAME) /usr/local/bin/
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJS)
+
+$(BUILD)/%.o: %.c | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD):
 	@mkdir -p $(BUILD)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-
-$(BUILD)%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+install: all
+	install -d $(DESTDIR)$(BINDIR)
+	install -m 755 $(NAME) $(DESTDIR)$(BINDIR)/$(NAME)
 
 clean:
 	$(RM) $(BUILD)
@@ -27,4 +31,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all install clean fclean rem
