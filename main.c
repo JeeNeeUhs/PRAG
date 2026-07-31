@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	int		r = 0;
 	int		n = 0;
 
-	char	opt;
+	int		opt;
 
 	if (argc == 1) {
 		usage(argv[0]);
