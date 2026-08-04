@@ -58,7 +58,7 @@ PRAG [OPTIONS] <char> <project-to-replace>
 
 ## Examples
 
-```sh
+```text
 $ PRAG G unix
 GNU, GNU's not unix
  
@@ -71,10 +71,10 @@ GNUNU, GNUNU's not unix
 $ PRAG -s Yet Another Markup Language
 YAML, Yet Another Markup Language
  
-$ PRAG -p P Recursive Acronym Generator
+$ PRAG -r P Recursive Acronym Generator
 PIRAG, PIRAG is Recursive Acronym Generator
  
-$ PRAG -r P Recursive Acronym Generator
+$ PRAG -p P Recursive Acronym Generator
 PRAG, PRAG's Recursive Acronym Generator
  
 $ PRAG -n R Project Manager

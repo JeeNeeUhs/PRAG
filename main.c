@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 				print_help(argv[0]);
 				return 0;
 			case 'v':
-				printf("PRAGv1.0.0\n");
+				printf("PRAGv1.0.1\n");
 				return 0;
 			case 'i':
 				i = 1;
