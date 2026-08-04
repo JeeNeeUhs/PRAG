@@ -4,6 +4,8 @@
 
 You know how GNU stands for "GNU's Not Unix" and WINE stands for "WINE Is Not an Emulator"? PRAG helps you come up with names like that for your own projects.
 
+![PRAG demo](demo.gif)
+
 ## Installation
 
 ```sh
