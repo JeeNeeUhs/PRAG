@@ -8,7 +8,7 @@ void print_help(char *prog);
 void usage(char *prog);
 void info(char *prog);
 void str_to_upper(char *str);
-void print_acronym(char *c, char *mid, char *middle, char **argv, int argc, int optind);
+void print_acronym(char *c, char *mid, char *middle, char **argv, int argc, int start);
 
 int main(int argc, char *argv[]) {
 	// FLAGS
@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
 	int		p = 0;
 	int		r = 0;
 	int		n = 0;
+	int		a = 0;
 
 	int		opt;
 
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	while ((opt = getopt(argc, argv, "hvilsprn")) != -1) {
+	while ((opt = getopt(argc, argv, "hvilsprna")) != -1) {
 		switch (opt) {
 			case 'h':
 				print_help(argv[0]);
@@ -52,6 +53,9 @@ int main(int argc, char *argv[]) {
 			case 'n':
 				n = 1;
 				break;
+			case 'a':
+				a = 1;
+				break;
 			case '?':
 				info(argv[0]);
 				return 1;
@@ -64,6 +68,24 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
+	if (a && l) {
+		fprintf(stderr, "Error: -a and -l cannot be used together.\n");
+		info(argv[0]);
+		return 1;
+	}
+
+	if (a && s) {
+		fprintf(stderr, "Error: -a and -s cannot be used together.\n");
+		info(argv[0]);
+		return 1;
+	}
+
+	if (a && optind >= argc) {
+		fprintf(stderr, "Error: <project-to-replace> cannot be empty when -a is used.\n");
+		info(argv[0]);
+		return 1;
+	}
+
 	if (!s) {
 		if (l) {
 			if (argv[optind][0] == '\0') {
@@ -71,7 +93,7 @@ int main(int argc, char *argv[]) {
 				info(argv[0]);
 				return 1;
 			}
-		} else {
+		} else if (!a) {
 			if (argv[optind][1] != '\0') {
 				fprintf(stderr, "Error: <char> must be a single character when -l is not used.\n");
 				info(argv[0]);
@@ -93,35 +115,35 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
-	if (l) {
+	char	*mid = "N";
+	char	*middle = "'s not ";
+
+	if (i) {
+		mid = "IN";
+		middle = " is not ";
+	} else if (p) {
+		mid = "";
+		middle = "'s ";
+	} else if (r) {
+		mid = "I";
+		middle = " is ";
+	} else if (n) {
+		mid = "";
+		middle = " ";
+	}
+
+	if (a) {
+		for (char c = 'A'; c <= 'Z'; c++) {
+			char pre[2] = {c, '\0'};
+			print_acronym(pre, mid, middle, argv, argc, optind);
+		}
+	} else if (l) {
 		char *c = argv[optind];
 		str_to_upper(c);
-
-		if (i) {
-			print_acronym(c, "IN", " is not ", argv, argc, optind);
-		} else if (p) {
-			print_acronym(c, "", "'s ", argv, argc, optind);
-		} else if (r) {
-			print_acronym(c, "I", " is ", argv, argc, optind);
-		} else if (n){
-			print_acronym(c, "", " ", argv, argc, optind);
-		} else {
-			print_acronym(c, "N", "'s not ", argv, argc, optind);
-		}
+		print_acronym(c, mid, middle, argv, argc, optind + 1);
 	} else {
-		char c = toupper(argv[optind][0]);
-
-		if (i) {
-			print_acronym(&c, "IN", " is not ", argv, argc, optind);
-		} else if (p) {
-			print_acronym(&c, "", "'s ", argv, argc, optind);
-		} else if (r) {
-			print_acronym(&c, "I", " is ", argv, argc, optind);
-		} else if (n){
-			print_acronym(&c, "", " ", argv, argc, optind);
-		} else {
-			print_acronym(&c, "N", "'s not ", argv, argc, optind);
-		}
+		char pre[2] = {toupper(argv[optind][0]), '\0'};
+		print_acronym(pre, mid, middle, argv, argc, optind + 1);
 	}
 
 

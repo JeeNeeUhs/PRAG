@@ -48,6 +48,7 @@ PRAG [OPTIONS] <char> <project-to-replace>
 | `-p` | Use `"'s"` instead of `"'s not"` — the "not" disappears from the acronym (cannot be combined with `-i`, `-s`, `-r`, `-n`) |
 | `-r` | Use `"is"` instead of `"'s not"` (cannot be combined with `-i`, `-s`, `-p`, `-n`) |
 | `-n` | Print only the acronym, nothing in between (cannot be combined with `-i`, `-s`, `-p`, `-r`) |
+| `-a` | Try every letter A-Z as the prefix, so `<char>` is not given (works with `-i`, `-p`, `-r`, `-n`; cannot be combined with `-l`, `-s`) |
 
 > **Note:** `-i`, `-s`, `-p`, `-r`, `-n` are mutually exclusize. Only one of them can be used at a time.
 
@@ -81,6 +82,17 @@ PRAG, PRAG's Recursive Acronym Generator
  
 $ PRAG -n R Project Manager
 RPM, RPM Project Manager
+
+$ PRAG -a unix
+ANU, ANU's not unix
+BNU, BNU's not unix
+...
+ZNU, ZNU's not unix
+
+$ PRAG -a -i emulator
+AINE, AINE is not emulator
+...
+ZINE, ZINE is not emulator
 ```
 
 ## Contributing

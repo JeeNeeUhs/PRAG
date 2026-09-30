@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <ctype.h>
 
-void print_acronym(char *c, char *mid, char *middle, char **argv, int argc, int optind) {
+void print_acronym(char *c, char *mid, char *middle, char **argv, int argc, int start) {
 	printf("%s%s", c, mid);
-	for (int i = optind + 1; i < argc; i++) {
+	for (int i = start; i < argc; i++) {
 		printf("%c", toupper(argv[i][0]));
 	}
 	printf("\n");
 	printf("%s%s", c, mid);
-	for (int i = optind + 1; i < argc; i++) {
+	for (int i = start; i < argc; i++) {
 		printf("%c", toupper(argv[i][0]));
 	}
 	printf("%s", middle);
-	for (int i = optind + 1; i < argc; i++) {
+	for (int i = start; i < argc; i++) {
 		printf("%s", argv[i]);
 		if (i < argc - 1) printf(" ");
 	}
@@ -48,6 +48,7 @@ void print_help(char *prog) {
 	printf("  -p\t Use \"'s\" instead of \"'s not\" (passive is not seen in the acronym)(You can't use with -isrn)\n");
 	printf("  -r\t Use \"is\" instead of \"'s not\" (e.g. PRAG)(You can't use with -ispn)\n");
 	printf("  -n\t just acronym not print anything in between (e.g. RPM)(You can't use with -ispr)\n");
+	printf("  -a\t Try every letter A-Z as the prefix, no <char> needed (You can't use with -ls)\n");
 	printf("\n");
 	printf("Arguments:\n");
 	printf("  <char(s)> \t\t The character to use in the acronym (e.g. G for GNU, W for WINE)\n");
@@ -62,4 +63,5 @@ void print_help(char *prog) {
 	printf("  %s -p P Recursive Acronym Generator \t -> PIRAG, PIRAG is Recursive Acronym Generator\n", prog);
 	printf("  %s -r P Recursive Acronym Generator \t -> PRAG, PRAG's Recursive Acronym Generator\n", prog);
 	printf("  %s -n R Project Manager \t\t\t -> RPM, RPM Project Manager\n", prog);
+	printf("  %s -a unix \t\t\t\t -> ANU ... ZNU, ANU's not unix ...\n", prog);
 }
