@@ -42,9 +42,9 @@ void print_help(char *prog) {
 	printf("Options:\n");
 	printf("  -v\t Show version number\n");
 	printf("  -h\t Show this help message\n");
-	printf("  -i\t Use \"is not\" instead of \"'s not\"(You can't use with -spr)\n");
-	printf("  -l\t Use a full string prefix (all chars included in acronym)\n");
-	printf("  -s\t Shorten each argument to its uppercase letters in the acronym (e.g. YAML)(You can't use with -iprn)\n");
+	printf("  -i\t Use \"is not\" instead of \"'s not\"(You can't use with -sprn)\n");
+	printf("  -l\t Use a full string prefix (all chars included in acronym)(You can't use with -as)\n");
+	printf("  -s\t Shorten each argument to its uppercase letters in the acronym (e.g. YAML)(You can't use with -iprnal)\n");
 	printf("  -p\t Use \"'s\" instead of \"'s not\" (passive is not seen in the acronym)(You can't use with -isrn)\n");
 	printf("  -r\t Use \"is\" instead of \"'s not\" (e.g. PRAG)(You can't use with -ispn)\n");
 	printf("  -n\t just acronym not print anything in between (e.g. RPM)(You can't use with -ispr)\n");

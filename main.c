@@ -62,10 +62,20 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	if (i + s + p + r > 1) {
-		fprintf(stderr, "Error: -i, -s, -p, -r cannot be used together.\n");
-		info(argv[0]);
-		return 1;
+	// mode flags are mutually exclusive, report the first two that were given
+	int		modes[] = {i, s, p, r, n};
+	char	*mode_names = "isprn";
+	char	first = '\0';
+
+	for (int k = 0; k < 5; k++) {
+		if (!modes[k])
+			continue;
+		if (first) {
+			fprintf(stderr, "Error: -%c and -%c cannot be used together.\n", first, mode_names[k]);
+			info(argv[0]);
+			return 1;
+		}
+		first = mode_names[k];
 	}
 
 	if (a && l) {
@@ -80,27 +90,43 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	if (a && optind >= argc) {
-		fprintf(stderr, "Error: <project-to-replace> cannot be empty when -a is used.\n");
+	if (l && s) {
+		fprintf(stderr, "Error: -l and -s cannot be used together.\n");
 		info(argv[0]);
 		return 1;
 	}
 
-	if (!s) {
-		if (l) {
-			if (argv[optind][0] == '\0') {
-				fprintf(stderr, "Error: <char> cannot be empty when -l is used.\n");
-				info(argv[0]);
-				return 1;
-			}
-		} else if (!a) {
-			if (argv[optind][1] != '\0') {
-				fprintf(stderr, "Error: <char> must be a single character when -l is not used.\n");
-				info(argv[0]);
-				return 1;
-			}
+	// -a and -s take no <char>, so the project words start right away
+	if (!a && !s) {
+		if (optind >= argc || argv[optind][0] == '\0') {
+			fprintf(stderr, "Error: <char> cannot be empty.\n");
+			info(argv[0]);
+			return 1;
 		}
-	} else {
+		if (!l && argv[optind][1] != '\0') {
+			fprintf(stderr, "Error: <char> must be a single character when -l is not used.\n");
+			info(argv[0]);
+			return 1;
+		}
+	}
+
+	int		start = (a || s) ? optind : optind + 1;
+
+	if (start >= argc) {
+		fprintf(stderr, "Error: <project-to-replace> cannot be empty.\n");
+		info(argv[0]);
+		return 1;
+	}
+
+	for (int k = start; k < argc; k++) {
+		if (argv[k][0] == '\0') {
+			fprintf(stderr, "Error: <project-to-replace> cannot contain empty words.\n");
+			info(argv[0]);
+			return 1;
+		}
+	}
+
+	if (s) {
 		for (int i = optind; i < argc; i++) {
 			if (isupper((unsigned char)argv[i][0])) {
 				printf("%c", argv[i][0]);
@@ -135,15 +161,15 @@ int main(int argc, char *argv[]) {
 	if (a) {
 		for (char c = 'A'; c <= 'Z'; c++) {
 			char pre[2] = {c, '\0'};
-			print_acronym(pre, mid, middle, argv, argc, optind);
+			print_acronym(pre, mid, middle, argv, argc, start);
 		}
 	} else if (l) {
 		char *c = argv[optind];
 		str_to_upper(c);
-		print_acronym(c, mid, middle, argv, argc, optind + 1);
+		print_acronym(c, mid, middle, argv, argc, start);
 	} else {
 		char pre[2] = {toupper(argv[optind][0]), '\0'};
-		print_acronym(pre, mid, middle, argv, argc, optind + 1);
+		print_acronym(pre, mid, middle, argv, argc, start);
 	}
 
 
