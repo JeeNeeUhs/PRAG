@@ -60,8 +60,8 @@ void print_help(char *prog) {
 	printf("  %s -i W emulator \t\t\t\t -> WINE, WINE is not emulator\n", prog);
 	printf("  %s -l GNU unix \t\t\t\t -> GNUNU, GNUNU's not unix\n", prog);
 	printf("  %s -s YAML Ain't Markup Language \t -> YAML, YAML Ain't Markup Language\n", prog);
-	printf("  %s -p P Recursive Acronym Generator \t -> PIRAG, PIRAG is Recursive Acronym Generator\n", prog);
-	printf("  %s -r P Recursive Acronym Generator \t -> PRAG, PRAG's Recursive Acronym Generator\n", prog);
+	printf("  %s -p P Recursive Acronym Generator \t -> PRAG, PRAG's Recursive Acronym Generator\n", prog);
+	printf("  %s -r P Recursive Acronym Generator \t -> PIRAG, PIRAG is Recursive Acronym Generator\n", prog);
 	printf("  %s -n R Project Manager \t\t\t -> RPM, RPM Project Manager\n", prog);
 	printf("  %s -a unix \t\t\t\t -> ANU ... ZNU, ANU's not unix ...\n", prog);
 }

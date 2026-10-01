@@ -50,7 +50,7 @@ PRAG [OPTIONS] <char> <project-to-replace>
 | `-n` | Print only the acronym, nothing in between (cannot be combined with `-i`, `-s`, `-p`, `-r`) |
 | `-a` | Try every letter A-Z as the prefix, so `<char>` is not given (works with `-i`, `-p`, `-r`, `-n`; cannot be combined with `-l`, `-s`) |
 
-> **Note:** `-i`, `-s`, `-p`, `-r`, `-n` are mutually exclusize. Only one of them can be used at a time.
+> **Note:** `-i`, `-s`, `-p`, `-r`, `-n` are mutually exclusive. Only one of them can be used at a time.
 
 ### Arguments
 
